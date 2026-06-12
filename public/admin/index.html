@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/webp" href="/m_ikon.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medipro Admin Paneli</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            /* Royal Blue */
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --bg-body: #f8fafc;
+            /* Very light slate */
+            --bg-sidebar: #1e293b;
+            /* Slate 800 */
+            --text-sidebar: #e2e8f0;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Icons */
+        svg {
+            display: block;
+        }
+
+        /* Login Screen */
+        #login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f1f5f9;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid var(--border-color);
+        }
+
+        .login-box h2 {
+            margin-top: 0;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        button {
+            width: auto;
+            /* Changed from 100% */
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Login buttons should be full width */
+        .login-box button {
+            width: 100%;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        /* Dashboard */
+        #dashboard {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        aside {
+            width: 260px;
+            background: var(--bg-sidebar);
+            color: var(--text-sidebar);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #334155;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            height: 80px;
+            padding: 0 1.5rem;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* Changed from center */
+            position: relative;
+        }
+
+        /* Sidebar Toggle Logic */
+        aside {
+            width: 260px;
+            background: var(--bg-sidebar);
+            color: var(--text-sidebar);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #334155;
+            flex-shrink: 0;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        aside.collapsed {
+            width: 80px;
+        }
+
+        aside.collapsed .brand-logo,
+        aside.collapsed .nav-text {
+            display: none !important;
+        }
+
+        aside.collapsed .sidebar-header {
+            justify-content: center;
+            padding: 0;
+        }
+
+        aside.collapsed .tab {
+            justify-content: center;
+            padding: 12px;
+            position: relative;
+        }
+
+        /* Tooltip on Collapsed Hover */
+        aside.collapsed .tab:hover::after {
+            content: attr(data-title);
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            margin-left: 10px;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155;
+            pointer-events: none;
+            animation: fadeIn 0.2s;
+        }
+
+        #sidebar-toggle {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #334155;
+            color: #94a3b8;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.2s;
+        }
+
+        #sidebar-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        aside.collapsed #sidebar-toggle {
+            background: transparent;
+            border: none;
+        }
+
+        aside.collapsed #sidebar-toggle svg {
+            transform: rotate(180deg);
+        }
+
+        .nav-links {
+            padding: 1rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #94a3b8;
+            margin-bottom: 4px;
+            font-weight: 500;
+            user-select: none;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+        .tab.active svg {
+            opacity: 1;
+        }
+
+        .user-panel {
+            padding: 1rem;
+            border-top: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        main {
+            flex: 1;
+            background: var(--bg-body);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            height: 64px;
+            background: white;
+            padding: 0 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        font-size: 1.5rem;
+        /* Larger modern title */
+        font-weight: 700;
+        color: #1e293b;
+        letter-spacing: -0.025em;
+        }
+
+        .content-area {
+            padding: 2rem 5%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-action-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .section-content {
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        .card-panel {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Specialized Buttons */
+        .btn-success {
+            background: var(--success);
+            width: auto;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            width: auto;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-primary-small {
+            background: var(--primary);
+            color: white !important;
+            /* Force white text */
+            width: auto;
+            padding: 0.5rem 1rem;
+        }
+
+        .delete-btn-corner {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fee2e2;
+            color: #ef4444;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Items */
+        .slide-card,
+        .feature-card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 2.5rem;
+            /* Handle space */
+        }
+
+        .slide-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .drag-handle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            cursor: grab;
+        }
+
+        .drag-handle:hover {
+            color: #64748b;
+        }
+
+        .slider-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .row {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .col {
+            flex: 1;
+        }
+
+        .input-group-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group-row input {
+            margin-bottom: 0;
+            flex: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 2000;
+        }
+
+        @media(max-width: 768px) {
+            #dashboard {
+                /* Keep row direction for sidebar */
+                flex-direction: row;
+            }
+
+            aside {
+                position: fixed;
+                height: 100%;
+                z-index: 100;
+                box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+            }
+
+            /* Push content if sidebar is expanded? 
+               No, for mobile let it overlay or just squeeze.
+               Let's add left margin to main to account for collapsed sidebar (80px)
+            */
+            main {
+                margin-left: 80px;
+                /* Default collapsed width */
+                width: calc(100% - 80px);
+            }
+
+            /* When sidebar is expanded on mobile, it covers content? 
+               Or we could user JS to add 'expanded' class instead of removing 'collapsed'.
+               Current logic: 'collapsed' class reduces width.
+               So Default is Expanded (260px).
+               Wait, on mobile we probably want START state to be Collapsed.
+            */
+
+            .content-area {
+                padding: 1rem;
+            }
+
+            .row {
+                flex-direction: column;
+            }
+        }
+
+        /* Modern Input Styles */
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        input,
+        textarea {
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Modern Button Styles */
+        button {
+            transition: all 0.2s;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .btn-verify {
+            background-color: #f59e0b;
+            /* Amber 500 */
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-verify:hover {
+            background-color: #d97706;
+            /* Amber 600 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Form Spacing & Rhythm */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .card-panel h3 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+            font-size: 1.25rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #475569;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Login -->
+    <div id="login-screen">
+        <div class="login-box" id="login-box">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <img src="/images/medipro_logo.webp" alt="Medipro" style="height: 50px;">
+                <h2 style="color: #334155; margin-top: 1rem;">Yönetici Girişi</h2>
+            </div>
+            <form id="login-form">
+                <label>E-posta</label>
+                <input type="email" id="email" required>
+                <label>Şifre</label>
+                <input type="password" id="password" required>
+                <button type="submit">Giriş Yap</button>
+                <p id="login-error" style="color: red; text-align: center; display: none; margin-top: 10px;">Hatalı
+                    giriş!</p>
+            </form>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#" onclick="toggleForgot(true)"
+                    style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">Şifremi Unuttum</a>
+            </div>
+        </div>
+
+        <div class="login-box" id="forgot-box" style="display: none;">
+            <h3 style="text-align: center;">Şifre Sıfırlama</h3>
+            <form id="forgot-form">
+                <label>E-posta</label>
+                <input type="email" id="forgot-email" required>
+                <button type="submit">Sıfırlama Linki Gönder</button>
+                <p id="forgot-msg" style="text-align: center; margin-top: 10px;"></p>
+            </form>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#" onclick="toggleForgot(false)"
+                    style="color: #666; text-decoration: none; font-size: 0.9rem;">Geri Dön</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" style="display: none;">
+        <aside>
+            <div class="sidebar-header">
+                <img src="/images/medipro_logo_white.webp" alt="Medipro" class="brand-logo"
+                    style="max-height: 35px; width: auto; display: block;">
+                <button id="sidebar-toggle" onclick="toggleSidebar()" title="Menüyü Aç/Kapa">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="nav-links tabs">
+                <div class="tab active" onclick="switchTab('hero')" data-title="Slider Görselleri">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span class="nav-text">Slider</span>
+                </div>
+                <div class="tab" onclick="switchTab('product')" data-title="Ürün & Özellikler">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                    <span class="nav-text">Ürün & Özellikler</span>
+                </div>
+                <div class="tab" onclick="switchTab('faq')" data-title="Sıkça Sorulan Sorular">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="nav-text">SSS (FAQ)</span>
+                </div>
+                <div class="tab" onclick="switchTab('regulations')" data-title="Yönetmelik">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                    </svg>
+                    <span class="nav-text">Yönetmelik</span>
+                </div>
+                <div class="tab" onclick="switchTab('contact')" data-title="İletişim">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <span class="nav-text">İletişim</span>
+                </div>
+                <div class="tab" onclick="switchTab('visitors')" data-title="Ziyaretçiler">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <span class="nav-text">Ziyaretçiler</span>
+                </div>
+                <div class="tab" onclick="switchTab('profile')" data-title="Profil">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    <span class="nav-text">Profil</span>
+                </div>
+            </nav>
+            <div class="user-panel">
+                <div style="font-size: 0.85rem;" class="nav-text">
+                    <div style="color: #94a3b8;">Admin</div>
+                </div>
+                <button class="btn-danger"
+                    style="width: auto; padding: 6px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 5px;"
+                    onclick="logout()" title="Çıkış Yap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    <span class="nav-text">Çıkış</span>
+                </button>
+            </div>
+        </aside>
+
+        <main>
+            <div class="top-bar">
+                <h2 id="page-title">Yönetim Paneli</h2>
+                <a href="/" target="_blank"
+                    style="text-decoration: none; color: var(--primary); font-weight: 500; font-size: 0.9rem;">Siteyi
+                    Görüntüle &rarr;</a>
+            </div>
+
+            <div class="content-area">
+                <!-- Hero -->
+                <div id="hero-content" class="section-content active">
+                    <div class="card-panel">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h3>Slider Görselleri</h3>
+                            <label for="hero-upload" class="btn-primary-small" style="cursor: pointer;">+ Yeni
+                                Görsel</label>
+                            <input type="file" id="hero-upload" accept="image/*" style="display: none;">
+                        </div>
+                        <div id="hero-grid" class="slider-grid"></div>
+                        <div style="text-align: right; margin-top: 2rem;">
+                            <button onclick="saveAll()" class="btn-primary-small">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product -->
+                <div id="product-content" class="section-content">
+                    <div class="card-panel">
+                        <h3>Ürün Genel Bilgileri</h3>
+                        <div id="product-general"></div>
+                    </div>
+                    <div class="card-panel">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3>Ürün Özellikleri</h3>
+                            <button onclick="addFeatureItem()" class="btn-success">+ Özellik</button>
+                        </div>
+                        <div id="features-list"></div>
+                        <div style="text-align: right; margin-top: 2rem;">
+                            <button onclick="saveAll()" class="btn-primary-small">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ -->
+                <div id="faq-content" class="section-content">
+                    <div class="card-panel">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3>Sıkça Sorulan Sorular</h3>
+                            <button onclick="addFaqItem()" class="btn-success">+ Soru</button>
+                        </div>
+                        <div id="faq-list"></div>
+                        <div style="text-align: right; margin-top: 2rem;">
+                            <button onclick="saveAll()" class="btn-primary-small">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regulations -->
+                <div id="regulations-content" class="section-content">
+                    <div class="card-panel">
+                        <h3>Yönetmelik Metinleri</h3>
+                        <div id="regulations-general"></div>
+                    </div>
+                    <div class="card-panel">
+                        <h3>Maddeler</h3>
+                        <div id="regulations-list-items"></div>
+                        <div style="text-align: right; margin-top: 2rem;">
+                            <button onclick="saveAll()" class="btn-primary-small">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div id="contact-content" class="section-content">
+                    <div class="card-panel">
+                        <h3>Genel İletişim Bilgileri</h3>
+                        <div id="contact-general-info">
+                            <!-- Injected by JS -->
+                        </div>
+                        <div style="text-align: right; margin-top: 1rem;">
+                            <button onclick="saveAll()" class="btn-primary-small">Kaydet</button>
+                        </div>
+                    </div>
+
+                    <div class="card-panel">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3>İletişim Personeli</h3>
+                            <button onclick="addStaffItem()" class="btn-success">+ Personel</button>
+                        </div>
+                        <div id="staff-list"></div>
+                    </div>
+                    <div class="card-panel">
+                        <h3>Footer Alanları</h3>
+                        <div class="row">
+                            <div class="col">
+                                <h4>Medipro (Sol)</h4>
+                                <div id="footer-medipro"></div>
+                            </div>
+                            <div class="col">
+                                <h4>Distribütör (Sağ)</h4>
+                                <div id="footer-dist"></div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; margin-top: 2rem;">
+                            <button onclick="saveAll()" class="btn-primary-small">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visitors Stats -->
+                <div id="visitors-content" class="section-content">
+
+                    <!-- Dashboard Header -->
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <h2 style="margin: 0; font-size: 1.5rem; color: #1e293b;">Analitik Paneli</h2>
+                            <select id="analytics-month" class="form-select" onchange="fetchAnalytics()"
+                                style="padding: 6px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 500;">
+                                <!-- Options populated by JS -->
+                            </select>
+                        </div>
+                        <button onclick="fetchAnalytics()" class="btn-primary-small">Yenile</button>
+                    </div>
+
+                    <!-- Modern Dashboard Grid (2 Columns) -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+
+                        <!-- Col 1: Top Cities (Left) -->
+                        <div
+                            style="background: white; border-radius: 16px; padding: 1.25rem; box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; height: 100%;">
+                            <h4
+                                style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #1e293b; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                                🏙️ En Çok Ziyaret Edilen Şehirler
+                            </h4>
+                            <ul id="top-cities-list"
+                                style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem;">
+                                <!-- List populated by JS -->
+                            </ul>
+                        </div>
+
+                        <!-- Col 2: KPIs (Right) -->
+                        <div
+                            style="background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%); border-radius: 16px; padding: 1.25rem; box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05); border: 1px solid #dbeafe; display: flex; flex-direction: column;">
+                            <h4
+                                style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #1e293b; font-weight: 600; text-align: center;">
+                                📊 Toplam Sayısal Veriler
+                            </h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; height: 100%;">
+                                <!-- KPI 1 -->
+                                <div
+                                    style="background: white; padding: 1rem; border-radius: 12px; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display:flex; flex-direction: column; justify-content: center;">
+                                    <div
+                                        style="color: #64748b; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        Tekil Ziyaretçi</div>
+                                    <div id="kpi-unique"
+                                        style="font-size: 2.25rem; font-weight: 800; color: #2563eb; line-height: 1.1;">
+                                        -
+                                    </div>
+                                </div>
+                                <!-- KPI 2 -->
+                                <div
+                                    style="background: white; padding: 1rem; border-radius: 12px; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display:flex; flex-direction: column; justify-content: center;">
+                                    <div
+                                        style="color: #64748b; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        Görüntülenme</div>
+                                    <div id="kpi-total"
+                                        style="font-size: 2.25rem; font-weight: 800; color: #0f172a; line-height: 1.1;">
+                                        -
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-panel" style="padding: 0; overflow: hidden;">
+                        <div
+                            style="padding: 1rem 1.5rem; border-bottom: 1px solid #e2e8f0; background: #f8fafc; display: flex; justify-content: space-between; align-items: center;">
+                            <h3 style="margin:0; font-size: 1.1rem;">Ziyaretçi Listesi</h3>
+                            <input type="text" id="visitor-search" placeholder="IP, Şehir veya Ülke Ara..."
+                                onkeyup="searchVisitors()"
+                                style="width: 250px; padding: 6px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0;">
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                                <thead style="background: white; border-bottom: 1px solid #e2e8f0;">
+                                    <tr>
+                                        <th
+                                            style="text-align: left; padding: 12px 16px; font-weight: 600; color: #475569;">
+                                            Ziyaretçi ID (Hash)</th>
+                                        <th
+                                            style="text-align: left; padding: 12px 16px; font-weight: 600; color: #475569;">
+                                            Konum</th>
+                                        <th
+                                            style="text-align: left; padding: 12px 16px; font-weight: 600; color: #475569;">
+                                            Cihaz</th>
+                                        <th
+                                            style="text-align: center; padding: 12px 16px; font-weight: 600; color: #475569;">
+                                            Ziyaret Sayısı</th>
+                                        <th
+                                            style="text-align: right; padding: 12px 16px; font-weight: 600; color: #475569;">
+                                            Son Görülme</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="visitor-stats-body">
+                                    <tr>
+                                        <td colspan="5" style="padding: 20px; text-align: center;">Yükleniyor...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination -->
+                        <div
+                            style="padding: 10px 20px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; background: #f8fafc;">
+                            <span id="page-info" style="font-size: 0.85rem; color: #64748b;">Sayfa 1 / 1</span>
+                            <div style="display: flex; gap: 5px;">
+                                <button onclick="changePage(-1)" class="btn-primary-small"
+                                    style="padding: 4px 12px; font-size: 0.8rem;">&larr; Önceki</button>
+                                <button onclick="changePage(1)" class="btn-primary-small"
+                                    style="padding: 4px 12px; font-size: 0.8rem;">Sonraki &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Phase 10: Policy Info -->
+                    <div
+                        style="margin-top: 2rem; padding: 1rem; border: 1px dashed #cbd5e1; border-radius: 8px; font-size: 0.85rem; color: #64748b; background: #f8fafc;">
+                        <strong style="color: #475569;">🛡️ Veri Saklama ve Gizlilik Politikası
+                            (KVKK/GDPR)</strong>
+                        <ul style="margin: 0.5rem 0 0 1.2rem; padding: 0;">
+                            <li>Ziyaretçi IP adresleri <strong>HMAC-SHA256</strong> ile şifrelenerek
+                                saklanmaktadır. Ham IP tutulmaz.</li>
+                            <li><strong>90 gün</strong> boyunca işlem yapmayan ziyaretçi kayıtları sistemden
+                                otomatik olarak silinir.</li>
+                            <li>Anonimleştirilmiş şehir istatistikleri, analiz amacıyla <strong>24 ay</strong>
+                                saklanır.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile -->
+            <div id="profile-content" class="section-content">
+                <div class="card-panel" style="max-width: 600px; margin: 0 auto;">
+                    <h3>Profil Bilgileri</h3>
+                    <div class="form-group">
+                        <label>E-posta</label>
+                        <div class="input-group-row">
+                            <input type="email" id="profile-email">
+                            <span id="email-status"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <div class="input-group-row">
+                            <input type="text" id="profile-phone">
+                            <span id="phone-status"></span>
+                        </div>
+                    </div>
+                    <div style="text-align: right; margin-bottom: 2rem;">
+                        <button onclick="updateProfileData()" class="btn-primary-small">Güncelle</button>
+                    </div>
+
+                    <hr style="border:0; border-top:1px solid #efefef; margin: 2rem 0;">
+
+                    <h3 style="color: #ef4444;">Şifre Değiştir</h3>
+                    <label>Mevcut Şifre</label>
+                    <input type="password" id="current-pass">
+                    <label>Yeni Şifre</label>
+                    <input type="password" id="new-pass">
+                    <div style="text-align: right;">
+                        <button onclick="updateDataWithPassword()" class="btn-danger">Şifreyi Değiştir</button>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    </main>
+    </div>
+
+    <div id="toast" class="toast">Kaydedildi!</div>
+
+    <script src="admin.js?v=2"></script>
+    <script src="admin_profile_logic.js?v=2"></script>
+    <script>
+        // Sidebar Toggle Logic
+        function toggleSidebar() {
+            const aside = document.querySelector('aside');
+            aside.classList.toggle('collapsed');
+            const isCollapsed = aside.classList.contains('collapsed');
+            localStorage.setItem('sidebar-collapsed', isCollapsed);
+        }
+
+        // Init State
+        document.addEventListener('DOMContentLoaded', () => {
+            const isCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
+            if (isCollapsed) {
+                document.querySelector('aside').classList.add('collapsed');
+            }
+        });
+
+        const originalSwitchTab = window.switchTab;
+        window.switchTab = function (tabId) {
+            if (typeof originalSwitchTab === 'function') originalSwitchTab(tabId);
+
+            // UI Visuals
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
+
+            // Activate Tab
+            const tab = document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`);
+            if (tab) tab.classList.add('active');
+
+            // Activate Content
+            // Handle profile content specifically if needed, or rely on IDs
+            let contentId = tabId + '-content';
+            const content = document.getElementById(contentId);
+            if (content) content.classList.add('active');
+
+            // Titles
+            const titles = {
+                'hero': 'Slider Görselleri',
+                'product': 'Ürün & Özellikler',
+                'faq': 'Sıkça Sorulan Sorular',
+                'regulations': 'Yönetmelik & Mevzuat',
+                'contact': 'İletişim & Footer',
+                'visitors': 'Ziyaretçi İstatistikleri',
+                'profile': 'Profil & Güvenlik'
+            };
+            const titleEl = document.getElementById('page-title');
+            if (titleEl && titles[tabId]) titleEl.textContent = titles[tabId];
+
+            // Load Data
+            if (tabId === 'visitors' && typeof fetchAnalytics === 'function') fetchAnalytics();
+            if (tabId === 'profile' && typeof loadProfile === 'function') loadProfile();
+        }
+    </script>
+</body>
+
+</html>

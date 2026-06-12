@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/webp" href="/m_ikon.webp" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medipro - Nihon Kohden AED-3100</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body>
+  <header>
+    <div class="container header-content">
+      <div class="logo-container" id="top-logo-container" style="cursor: pointer;">
+        <img src="/images/medipro_logo.webp" alt="Medipro Logo" class="logo" id="medipro-logo">
+        <div style="width: 1px; height: 30px; background: #ccc;"></div>
+        <img src="/images/Nihon_Kohden_Logo.webp" alt="Nihon Kohden Logo" class="logo" id="nk-logo">
+      </div>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="#product" data-i18n="nav.product">Cardiolife AED-3100</a>
+        <a href="#regulations" data-i18n="nav.regulations">Yönetmelik ve Mevzuat</a>
+        <a href="#faq" data-i18n="nav.faq">SSS</a>
+        <a href="#contact" data-i18n="nav.contact">İletişim</a>
+      </nav>
+
+      <div class="nav-controls">
+        <button id="theme-toggle" class="control-btn" aria-label="Toggle Theme">
+          <span id="theme-icon">◐</span>
+        </button>
+        <button id="lang-toggle" class="control-btn" aria-label="Switch Language">
+          <span id="lang-text">EN</span>
+        </button>
+        <button id="mobile-menu-btn" class="control-btn mobile-only" aria-label="Menu">
+          <span>☰</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Carousel -->
+    <section class="hero" id="home">
+      <div class="carousel-container" id="carousel">
+        <!-- Slide 1 -->
+        <div class="carousel-slide active">
+          <img src="/images/device_front_main.webp" alt="AED Front View">
+          <div class="slide-content">
+            <h2 class="slide-title" data-i18n="hero.s1_title">Hayat Kurtaran Teknoloji</h2>
+            <p class="slide-desc" data-i18n="hero.s1_desc">Nihon Kohden AED-3100...</p>
+            <a href="#product" class="btn" data-i18n="hero.cta">Detaylı Bilgi</a>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="carousel-slide">
+          <img src="/images/device_lid_open.webp" alt="AED Open View">
+          <div class="slide-content">
+            <h2 class="slide-title" data-i18n="hero.s2_title">Kolay Kullanım</h2>
+            <p class="slide-desc" data-i18n="hero.s2_desc">Sadece kapağı açın...</p>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="carousel-slide">
+          <img src="/images/device_start_button.webp" alt="AED Usage">
+          <div class="slide-content">
+            <h2 class="slide-title" data-i18n="hero.s3_title">Mevzuata Tam Uyum</h2>
+            <p class="slide-desc" data-i18n="hero.s3_desc">Yönetmeliklere uygun...</p>
+          </div>
+        </div>
+
+        <button class="carousel-btn prev-btn" id="prev-btn">❮</button>
+        <button class="carousel-btn next-btn" id="next-btn">❯</button>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section container" id="about">
+      <div class="about-partners">
+        <img src="/images/medipro_logo.webp" alt="Medipro" class="partner-logo medipro">
+        <div class="partner-divider"></div>
+        <img src="/images/Nihon_Kohden_Logo.webp" alt="Nihon Kohden" class="partner-logo nk">
+      </div>
+      <div class="about-grid">
+        <div class="card p-4" style="background: var(--bg-secondary); padding: 2rem; border-radius: 8px;">
+          <p data-i18n="about.medipro">Medipro text...</p>
+        </div>
+        <div class="card p-4" style="background: var(--bg-secondary); padding: 2rem; border-radius: 8px;">
+          <p data-i18n="about.distributor">Distributor text...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Features -->
+    <section class="section" id="product" style="background: var(--bg-secondary);">
+      <div class="container">
+        <h2 class="section-title" data-i18n="product.title">Cardiolife AED-3100</h2>
+        <p style="text-align: center; margin-bottom: 2rem; font-size: 1.2rem;" data-i18n="product.desc">Desc</p>
+
+        <div class="features-grid" id="features-container"
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+          <!-- Injected by JS -->
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+          <!-- Note: No actual PDF yet, using # -->
+          <a href="#regulations" class="btn" style="background-color: #444;">
+            <span class="btn-icon">⬇</span>
+            <span data-i18n="product.download_btn">Teknik Şartnameyi İndir</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Regulations -->
+    <section class="section container" id="regulations">
+      <h2 class="section-title" data-i18n="regulations.title">Yönetmelik ve Mevzuat</h2>
+      <div
+        style="background: var(--card-bg); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--border-color);">
+        <p style="margin-bottom: 1.5rem;" data-i18n="regulations.desc">Desc</p>
+        <ul id="regulations-list" style="list-style: disc; padding-left: 1.5rem; margin-bottom: 2rem;">
+          <!-- Injected -->
+        </ul>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="/pdf-viewer.html?file=/docs/regulation.pdf&title=Yönetmelik" target="_blank" class="btn">
+            <span class="btn-icon">📄</span>
+            <span data-i18n="regulations.download_reg">Yönetmeliği İndir</span>
+          </a>
+          <a href="/pdf-viewer.html?file=/docs/EK-AED_Bulundurması_Zorunlu_Yerler.pdf&title=Zorunlu Yerler"
+            target="_blank" class="btn" style="background-color: #666;">
+            <span class="btn-icon">📋</span>
+            <span data-i18n="regulations.download_annex">Zorunlu Yerler</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section container" id="faq">
+      <h2 class="section-title" data-i18n="faq.title">SSS</h2>
+      <div id="faq-accordion">
+        <!-- Injected -->
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact" style="background: var(--bg-secondary);">
+      <div class="container">
+        <h2 class="section-title" data-i18n="contact.title">Bize Ulaşın</h2>
+        <div class="contact-grid">
+
+          <!-- Contact Info -->
+          <div class="contact-info-card">
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div>
+                <h4 data-i18n="contact.address">Adres</h4>
+                <p id="contact-address-text">Şerifali Mh. Başer Sk. No:32 34775 Ümraniye / İstanbul</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div>
+                <h4 data-i18n="contact.phone">Telefon</h4>
+                <p id="contact-phone-text">
+                  <a href="tel:02163493810">0216 349 38 10</a><br>
+                  <a href="tel:4443524">444 35 24</a>
+                </p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <div>
+                <h4 data-i18n="contact.email">E-Mail</h4>
+                <p id="contact-email-text"><a href="mailto:info@medipro.com.tr">info@medipro.com.tr</a></p>
+              </div>
+            </div>
+
+            <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid var(--border-color);">
+
+            <div class="staff-list">
+              <div class="staff-member">
+                <strong>Satış Müdürü - Ersin GÜLDAL:</strong><br>
+                <a href="tel:+905303705669">+90 530 370 56 69</a> - <a
+                  href="mailto:ersin.guldal@medipro.com.tr">ersin.guldal@medipro.com.tr</a>
+              </div>
+              <div class="staff-member">
+                <strong>Satış Destek Uzmanı - Aleyna IŞIK:</strong><br>
+                <a href="tel:+905300744150">+90 530 074 41 50</a> - <a
+                  href="mailto:aleyna.isik@medipro.com.tr">aleyna.isik@medipro.com.tr</a>
+              </div>
+              <div class="staff-member">
+                <strong>Teknik Servis Müdürü - Ömer Faruk HACICAFEROĞLU:</strong><br>
+                <a href="tel:+905303380544">+90 530 338 05 44</a> - <a
+                  href="mailto:omer.hacicaferoglu@medipro.com.tr">omer.hacicaferoglu@medipro.com.tr</a>
+              </div>
+              <div class="staff-member">
+                <strong>IT ve Entegrasyon Uzmanı - Emir Tarık DEDE:</strong><br>
+                <a href="tel:+905303380543">+90 530 338 05 43</a> - <a
+                  href="mailto:emir.dede@medipro.com.tr">emir.dede@medipro.com.tr</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-info-card">
+            <h3 style="margin-bottom: 1.5rem;" data-i18n="contact.form_title">Bilgi Talep Formu</h3>
+            <form id="contact-form" action="mailto:info@medipro.com.tr" method="post" enctype="text/plain">
+              <div class="form-group">
+                <label class="form-label" data-i18n="contact.name_label">Adınız</label>
+                <input type="text" name="name" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" data-i18n="contact.email_label">Email</label>
+                <input type="email" name="email" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" data-i18n="contact.message_label">Mesaj</label>
+                <textarea name="message" class="form-textarea" rows="4" required></textarea>
+              </div>
+              <!-- Fake ReCaptcha -->
+              <!-- ReCaptcha Removed -->
+
+              <button type="submit" class="btn" style="width: 100%;" data-i18n="contact.send_btn">Gönder</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container footer-content">
+      <div class="footer-col">
+        <div
+          style="margin-bottom: 1.5rem; display: grid; grid-template-columns: auto auto auto; align-items: center; gap: 15px; justify-content: start;">
+          <img src="/images/medipro_logo.webp" alt="Medipro" style="height: 40px; object-fit: contain;">
+          <div style="height: 30px; width: 1px; background-color: #666;"></div>
+          <img src="/images/Nihon_Kohden_Logo.webp" alt="Nihon Kohden" style="height: 30px; object-fit: contain;">
+        </div>
+        <p class="footer-desc">
+          Medipro İç ve Dış Ticaret LTD. ŞTİ.<br>
+          Nihon Kohden Türkiye Distribütörü
+        </p>
+        <div class="social-links">
+          <a href="http://medipro.com.tr/" target="_blank" aria-label="Website" class="social-btn website">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/company/medipro-ic-ve-dis-tic-ltd-sti" target="_blank" aria-label="LinkedIn"
+            class="social-btn linkedin">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/@mediproicvedis" target="_blank" aria-label="YouTube"
+            class="social-btn youtube">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/p/Medipro-%C4%B0%C3%A7-ve-D%C4%B1%C5%9F-Tic-Ltd-%C5%9Eti-100063746875812/"
+            target="_blank" aria-label="Facebook" class="social-btn facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/medipro_ltd/" target="_blank" aria-label="Instagram"
+            class="social-btn instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+              <path
+                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="contact.address">Adres & Konum</h3>
+        <p id="footer-address-text">
+          Şerifali Mh. Başer Sk. No:32<br>
+          34775 Ümraniye / İstanbul
+        </p>
+        <br>
+        <div class="map-links" style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <a href="https://maps.google.com/?q=Şerifali+Mh.+Başer+Sk.+No:32+34775+Ümraniye+/+İstanbul" target="_blank"
+            class="map-link">
+            Google Maps'te Aç ↗
+          </a>
+          <a href="http://maps.apple.com/?q=Şerifali+Mh.+Başer+Sk.+No:32+34775+Ümraniye+/+İstanbul" target="_blank"
+            class="map-link">
+            Apple Maps'te Aç ↗
+          </a>
+          <a href="https://yandex.com.tr/harita/?text=Şerifali+Mh.+Başer+Sk.+No:32+34775+Ümraniye+/+İstanbul"
+            target="_blank" class="map-link">
+            Yandex Maps'te Aç ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.047099274998!2d29.153043600000004!3d41.0023423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac64ea680d6b9%3A0x3f4b611738a5bd2f!2zTWVkaXBybyDEsMOnIHZlIETEscWfIFRpYy4gTHRkLiDFnnRpLg!5e0!3m2!1str!2str!4v1769167106403!5m2!1str!2str"
+          width="100%" height="200" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Medipro İç ve Dış Ticaret LTD. ŞTİ.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn" aria-label="Yukarı Çık">↑</button>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Görüntüleyici</title>
+    <link rel="icon" type="image/webp" href="/m_ikon.webp">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: #525659;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            height: 60px;
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .pdf-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .download-btn {
+            background-color: #0b5ed8;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background-color: #094cb0;
+        }
+
+        iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="pdf-title" id="display-title">Belge</div>
+        <a id="download-link" href="#" class="download-btn" download>
+            <span>⬇</span> İndir
+        </a>
+    </div>
+
+    <iframe id="pdf-frame" src=""></iframe>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const file = urlParams.get('file');
+        const title = urlParams.get('title');
+
+        // Set Tab Title
+        if (title) {
+            document.title = title;
+            document.getElementById('display-title').textContent = title;
+        } else if (file) {
+            const filename = file.split('/').pop();
+            document.title = filename;
+            document.getElementById('display-title').textContent = filename;
+        }
+
+        // Set PDF Source with #toolbar=0 to hide native bar with wrong title
+        if (file) {
+            document.getElementById('pdf-frame').src = file + "#toolbar=0";
+            document.getElementById('download-link').href = file;
+        } else {
+            document.body.innerHTML = '<p style="color:white; text-align:center; padding-top:20px;">Dosya belirtilmedi.</p>';
+        }
+    </script>
+</body>
+
+</html>

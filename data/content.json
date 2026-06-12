@@ -1,0 +1,215 @@
+{
+  "hero": [
+    {
+      "image": "/uploads/1769178243306-device_front_main.webp",
+      "title": {
+        "tr": "Hayat Kurtaran Teknoloji",
+        "en": "Life Saving Technology"
+      },
+      "desc": {
+        "tr": "Nihon Kohden AED-3100, ani kalp durmalarında hızlı ve güvenli müdahale için tasarlandı.",
+        "en": "Nihon Kohden AED-3100 is designed for fast and safe intervention in sudden cardiac arrests."
+      }
+    },
+    {
+      "image": "/uploads/1769178256478-device_lid_open.webp",
+      "title": {
+        "tr": "Kolay Kullanım",
+        "en": "Easy to Use"
+      },
+      "desc": {
+        "tr": "Sadece kapağı açın ve sesli komutları takip edin. Sağlık personeli olmayanlar bile güvenle kullanabilir.",
+        "en": "Just open the lid and follow voice commands. Safe for use by non-medical personnel."
+      }
+    },
+    {
+      "image": "/uploads/1769178268279-device_start_button.webp",
+      "title": {
+        "tr": "Mevzuata Tam Uyum",
+        "en": "Full Compliance"
+      },
+      "desc": {
+        "tr": "Yönetmeliklere uygun, Türkçe sesli komut ve 8 yıl garanti.",
+        "en": "Compliant with regulations, Turkish voice commands, and 8-year warranty."
+      }
+    }
+  ],
+  "about": {
+    "medipro": {
+      "tr": "Sektörde 15 yılı aşan tecrübemizi, 2009 yılında kurulan şirketimizin dinamizmi ile birleştirerek Türkiyenin her noktasına 45'in üzerindeki bayimiz ile hizmet vermekteyiz.",
+      "en": "Combining over 15 years of experience with the dynamism of our company established in 2009, we serve 45+ dealers across Turkey."
+    },
+    "distributor": {
+      "tr": "Dünyanın çeşitli noktalarında bulunan ve her biri alanında lider üretici firmalar ile çalışıp bu firmaların ürünlerinin Türkiye dağıtımını gerçekleştirmekteyiz. Nihon Kohden Türkiye distribütörü olarak en ileri teknolojiyi sunuyoruz.",
+      "en": "We work with leading manufacturers worldwide and distribute their products in Turkey. We offer advanced technology as the Nihon Kohden Turkey distributor."
+    }
+  },
+  "product": {
+    "title": {
+      "tr": "Cardiolife AED-3100",
+      "en": "Cardiolife AED-3100"
+    },
+    "desc": {
+      "tr": "Hızlı, Güvenli ve Kullanımı Kolay.",
+      "en": "Fast, Safe, and Easy to Use."
+    },
+    "features": [
+      {
+        "title": {
+          "tr": "Sürekli VF Analizi",
+          "en": "Continuous VF Analysis"
+        },
+        "desc": {
+          "tr": "CPR sırasında bile analiz yaparak daha hızlı şok imkanı sağlar.",
+          "en": "Analyzes even during CPR, allowing for faster shock delivery."
+        }
+      },
+      {
+        "title": {
+          "tr": "Pediatrik Mod",
+          "en": "Pediatric Mode"
+        },
+        "desc": {
+          "tr": "Aynı pedlerle çocuk moduna geçiş imkanı.",
+          "en": "Switch to child mode using the same pads."
+        }
+      },
+      {
+        "title": {
+          "tr": "Günlük Self-Test",
+          "en": "Daily Self-Test"
+        },
+        "desc": {
+          "tr": "Batarya, ped ve devrelerin her gün otomatik kontrolü.",
+          "en": "Automatic daily check of battery, pads, and circuits."
+        }
+      },
+      {
+        "title": {
+          "tr": "Dayanıklı Tasarım",
+          "en": "Durable Design"
+        },
+        "desc": {
+          "tr": "IP55 su/toz koruması ve -5°C ila +50°C çalışma aralığı.",
+          "en": "IP55 water/dust protection and -5°C to +50°C operating range."
+        }
+      }
+    ]
+  },
+  "regulations": {
+    "title": {
+      "tr": "Yönetmelik ve Mevzuat",
+      "en": "Rules & Regulations"
+    },
+    "desc": {
+      "tr": "9 Aralık 2025 tarihli 'Taşınabilir Otomatik Şok Cihazı (OED) Hakkında Yönetmelik' kapsamında bilmeniz gerekenler.",
+      "en": "What you need to know about the 'Regulation on Portable Automated External Defibrillators (AED)' dated Dec 9, 2025."
+    },
+    "items": [
+      {
+        "tr": "OED'lerin Ürün Takip Sistemi'ne (ÜTS) kayıtlı olması zorunludur.",
+        "en": "AEDs must be registered in the Product Tracking System (ÜTS)."
+      },
+      {
+        "tr": "Havaalanları, AVM'ler, spor tesisleri ve oteller gibi yerlerde bulundurulması zorunludur.",
+        "en": "It is mandatory to have them in places like airports, shopping malls, sports facilities, and hotels."
+      },
+      {
+        "tr": "Cihazın periyodik test sonuçları ve durumunun izlenebilir olması gerekmektedir.",
+        "en": "Periodic test results and the status of the device must be traceable."
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": {
+        "tr": "Bu cihazı sağlıkçı olmayan biri kullanabilir mi?",
+        "en": "Can a non-medical person use this device?"
+      },
+      "answer": {
+        "tr": "Evet. Yönetmelik; OED'yi sağlık meslek mensubu yanında ilk yardımcı ve halktan kurtarıcının da kullanabileceğini tanımlar. Cihaz kapağı açılınca sesli olarak sizi yönlendirir.",
+        "en": "Yes. The regulation defines that AEDs can be used by first aiders and lay rescuers alongside medical professionals. The device guides you vocally when the lid is opened."
+      }
+    },
+    {
+      "question": {
+        "tr": "Çocuklarda ayrı ped gerekiyor mu?",
+        "en": "Are separate pads required for children?"
+      },
+      "answer": {
+        "tr": "Hayır. AED-3100 üzerinde bulunan çocuk modu anahtarı ile yetişkin pedleri kullanılarak çocuklarda güvenle kullanılabilir.",
+        "en": "No. With the pediatric mode switch on the AED-3100, adult pads can be safely used on children."
+      }
+    },
+    {
+      "question": {
+        "tr": "Bakım ve pil ömrü nedir?",
+        "en": "What is the maintenance and battery life?"
+      },
+      "answer": {
+        "tr": "Cihaz günlük kendini test eder. Batarya bekleme ömrü 4 yıldır. Durum göstergesi yeşil olduğu sürece cihaz kullanıma hazırdır.",
+        "en": "The device tests itself daily. Battery standby life is 4 years. As long as the status indicator is green, the device is ready for use."
+      }
+    },
+    {
+      "question": {
+        "tr": "Yönetmelik ne zaman yürürlüğe giriyor?",
+        "en": "When does the regulation come into effect?"
+      },
+      "answer": {
+        "tr": "Yönetmelik 1 Ocak 2026 tarihinde yürürlüğe girecektir.",
+        "en": "The regulation will come into effect on January 1, 2026."
+      }
+    }
+  ],
+  "contact": {
+    "info": {
+      "address": {
+        "tr": "Şerifali Mh. Başer Sk. No:32 34775 Ümraniye / İstanbul",
+        "en": "Şerifali Mh. Başer Sk. No:32 34775 Ümraniye / İstanbul"
+      },
+      "phone": {
+        "tr": "0216 349 38 10\n444 35 24",
+        "en": "0216 349 38 10\n444 35 24"
+      },
+      "email": {
+        "tr": "info@medipro.com.tr",
+        "en": "info@medipro.com.tr"
+      }
+    },
+    "staff": [
+      {
+        "title": {
+          "tr": "Satış Müdürü - Ersin GÜLDAL",
+          "en": "Sales Manager - Ersin GÜLDAL"
+        },
+        "phone": "+90 530 370 56 69",
+        "email": "ersin.guldal@medipro.com.tr"
+      },
+      {
+        "title": {
+          "tr": "Satış Destek Uzmanı - Aleyna IŞIK",
+          "en": "Sales Support Specialist - Aleyna IŞIK"
+        },
+        "phone": "+90 530 074 41 50",
+        "email": "aleyna.isik@medipro.com.tr"
+      },
+      {
+        "title": {
+          "tr": "Teknik Servis Müdürü - Ömer Faruk HACICAFEROĞLU",
+          "en": "Technical Service Manager - Ömer Faruk HACICAFEROĞLU"
+        },
+        "phone": "+90 530 338 05 44",
+        "email": "omer.hacicaferoglu@medipro.com.tr"
+      },
+      {
+        "title": {
+          "tr": "IT ve Entegrasyon Uzmanı - Emir Tarık DEDE",
+          "en": "IT and Integration Specialist - Emir Tarık DEDE"
+        },
+        "phone": "+90 530 338 05 43",
+        "email": "emir.dede@medipro.com.tr"
+      }
+    ]
+  }
+}
